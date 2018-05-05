@@ -9,13 +9,17 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Unit = Kotlin.kotlin.Unit;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var throwCCE = Kotlin.throwCCE;
+  var Throwable = Error;
   var ensureNotNull = Kotlin.ensureNotNull;
+  var throwCCE = Kotlin.throwCCE;
   var get_js = Kotlin.kotlin.js.get_js_1yb8b7$;
   var await_0 = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental.await_t11jrl$;
+  var Exception = Kotlin.kotlin.Exception;
   var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
   var async = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental.async_nrwt9h$;
+  EventException.prototype = Object.create(Throwable.prototype);
+  EventException.prototype.constructor = EventException;
   function FancyText(text) {
     this.text_0 = text;
   }
@@ -61,13 +65,133 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
     }
     return HttpRequestDebug_instance;
   }
+  function EventException() {
+    Throwable.call(this);
+    this.message_jws7ak$_0 = void 0;
+    this.cause_cglmnq$_0 = null;
+    Kotlin.captureStack(Throwable, this);
+    this.name = 'EventException';
+  }
+  Object.defineProperty(EventException.prototype, 'message', {
+    get: function () {
+      return this.message_jws7ak$_0;
+    }
+  });
+  Object.defineProperty(EventException.prototype, 'cause', {
+    get: function () {
+      return this.cause_cglmnq$_0;
+    }
+  });
+  EventException.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'EventException',
+    interfaces: [Throwable]
+  };
+  function testPromise$lambda(closure$fail) {
+    return function (resolve, reject) {
+      if (closure$fail)
+        reject(Kotlin.newThrowable('fallito!'));
+      else
+        resolve('ok!');
+      return Unit;
+    };
+  }
+  function testPromise(fail) {
+    return new Promise(testPromise$lambda(fail));
+  }
+  function main$lambda$lambda(closure$ta1) {
+    return function (it) {
+      closure$ta1.value = closure$ta1.value + ' catch ';
+      return ' return ';
+    };
+  }
+  function main$lambda(closure$ta1_0) {
+    return function ($receiver, continuation_0, suspended) {
+      var instance = new Coroutine$main$lambda(closure$ta1_0, $receiver, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$main$lambda(closure$ta1_0, $receiver, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 5;
+    this.local$closure$ta1 = closure$ta1_0;
+    this.local$tmp$ = void 0;
+    this.local$tmp$_0 = void 0;
+  }
+  Coroutine$main$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$main$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$main$lambda.prototype.constructor = Coroutine$main$lambda;
+  Coroutine$main$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$closure$ta1.value = this.local$closure$ta1.value + ' uno ';
+            this.local$closure$ta1.value = this.local$closure$ta1.value + ' due ';
+            this.exceptionState_0 = 2;
+            this.local$tmp$ = this.local$closure$ta1;
+            this.local$tmp$_0 = this.local$tmp$.value;
+            this.state_0 = 1;
+            this.result_0 = await_0(testPromise(true).catch(main$lambda$lambda(this.local$closure$ta1)), this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            this.local$tmp$.value = this.local$tmp$_0 + this.result_0;
+            return this.local$closure$ta1.value = this.local$closure$ta1.value + ' tre ', Unit;
+          case 2:
+            this.exceptionState_0 = 5;
+            var ex = this.exception_0;
+            if (Kotlin.isType(ex, Exception)) {
+              return this.local$closure$ta1.value = this.local$closure$ta1.value + ' exe ', Unit;
+            }
+             else {
+              throw ex;
+            }
+
+          case 3:
+            this.state_0 = 4;
+            continue;
+          case 4:
+            return;
+          case 5:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 5) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function main(args) {
+    var tmp$, tmp$_0;
+    var elements = Kotlin.isType(tmp$ = ensureNotNull(document.getElementById('div1')), HTMLDivElement) ? tmp$ : throwCCE();
+    var str = get_js(Kotlin.getKClassFromExpression(elements)).name;
+    var ta1 = Kotlin.isType(tmp$_0 = ensureNotNull(document.getElementById('ta1')), HTMLTextAreaElement) ? tmp$_0 : throwCCE();
+    async(void 0, void 0, void 0, main$lambda(ta1));
+  }
   var canvas;
   function initializeCanvas() {
     var tmp$, tmp$_0;
     var canvas = Kotlin.isType(tmp$ = document.createElement('canvas'), HTMLCanvasElement) ? tmp$ : throwCCE();
     var context = Kotlin.isType(tmp$_0 = canvas.getContext('2d'), CanvasRenderingContext2D) ? tmp$_0 : throwCCE();
-    context.canvas.width = window.innerWidth;
-    context.canvas.height = window.innerHeight;
+    context.canvas.width = window.innerWidth - 200 | 0;
+    context.canvas.height = window.innerHeight - 200 | 0;
     ensureNotNull(document.body).appendChild(canvas);
     return canvas;
   }
@@ -141,7 +265,7 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
     get_context().fillRect(0.0, 0.0, get_width(), get_height());
     get_context().restore();
   }
-  function main$lambda(closure$logos) {
+  function main2$lambda(closure$logos) {
     return function () {
       var tmp$, tmp$_0;
       renderBackground();
@@ -154,7 +278,7 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
     };
   }
   var Array_0 = Array;
-  function main(args) {
+  function main2(args) {
     var interval = 50;
     var array = Array_0(3);
     var tmp$;
@@ -163,68 +287,7 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
       array[i] = new HelloKotlin();
     }
     var logos = array;
-    window.setInterval(main$lambda(logos), interval);
-  }
-  function main2$lambda(closure$elements_0) {
-    return function ($receiver, continuation_0, suspended) {
-      var instance = new Coroutine$main2$lambda(closure$elements_0, $receiver, this, continuation_0);
-      if (suspended)
-        return instance;
-      else
-        return instance.doResume(null);
-    };
-  }
-  function Coroutine$main2$lambda(closure$elements_0, $receiver, controller, continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.$controller = controller;
-    this.exceptionState_0 = 1;
-    this.local$closure$elements = closure$elements_0;
-    this.local$tmp$ = void 0;
-  }
-  Coroutine$main2$lambda.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$main2$lambda.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$main2$lambda.prototype.constructor = Coroutine$main2$lambda;
-  Coroutine$main2$lambda.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.local$tmp$ = this.local$closure$elements;
-            this.state_0 = 2;
-            this.result_0 = await_0(HttpRequestDebug_getInstance().getString_61zpoe$('http://httpbin.org/ip'), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            this.local$tmp$.innerHTML = this.result_0;
-            var x = JSON.parse(this.local$closure$elements.innerHTML);
-            this.local$closure$elements.innerHTML = get_js(Kotlin.getKClassFromExpression(x)).name;
-            return console.log(x), Unit;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
-  function main2(args) {
-    var tmp$;
-    var elements = Kotlin.isType(tmp$ = ensureNotNull(document.getElementById('div1')), HTMLDivElement) ? tmp$ : throwCCE();
-    var str = get_js(Kotlin.getKClassFromExpression(elements)).name;
-    async(void 0, void 0, void 0, main2$lambda(elements));
+    window.setInterval(main2$lambda(logos), interval);
   }
   var package$demo = _.demo || (_.demo = {});
   var package$common = package$demo.common || (package$demo.common = {});
@@ -232,6 +295,9 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
   Object.defineProperty(_, 'HttpRequestDebug', {
     get: HttpRequestDebug_getInstance
   });
+  _.EventException = EventException;
+  _.testPromise_6taknv$ = testPromise;
+  _.main_kand9s$ = main;
   Object.defineProperty(_, 'canvas', {
     get: function () {
       return canvas;
@@ -249,7 +315,6 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
   });
   _.HelloKotlin = HelloKotlin;
   _.renderBackground = renderBackground;
-  _.main_kand9s$ = main;
   _.main2_kand9s$ = main2;
   canvas = initializeCanvas();
   main([]);
