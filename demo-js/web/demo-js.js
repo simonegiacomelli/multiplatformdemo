@@ -449,99 +449,26 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
     simpleName: 'ResourceWidget',
     interfaces: [Widget]
   };
+  function main$lambda$lambda(this$) {
+    return function () {
+      this$.log_61zpoe$('ciaoo');
+      return Unit;
+    };
+  }
+  function main$lambda$lambda_0(this$) {
+    return function () {
+      this$.log_61zpoe$('ciaoo2');
+      return Unit;
+    };
+  }
   function main(args) {
-    MainWidget$init_getInstance().startup_2rdptt$(ensureNotNull(document.getElementById('loading')));
-    var url = 'mqttwss://qbkzojmr:rTaeAnsujbt-@m23.cloudmqtt.com:37516?dest=ESP_0100AE&clientId=dart-client';
-    var conf = new Uri(url);
-    if (false)
-      PahoTest_getInstance().tryit_za3rmp$(conf);
+    var app = new WidgetManager(ensureNotNull(document.getElementById('loading')));
+    app.handleBack();
+    var $receiver = app.create_ehz7t8$(new LogWidget());
+    $receiver.whenReady_o14v8n$(main$lambda$lambda($receiver));
+    $receiver.whenReady_o14v8n$(main$lambda$lambda_0($receiver));
+    $receiver.show();
   }
-  function httpRequestTest$httpRequest$lambda$lambda(closure$resolve, closure$xhr) {
-    return function (it) {
-      closure$resolve(closure$xhr.responseText);
-      return Unit;
-    };
-  }
-  function httpRequestTest$httpRequest$lambda(closure$url) {
-    return function (resolve, reject) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', closure$url);
-      xhr.addEventListener('load', httpRequestTest$httpRequest$lambda$lambda(resolve, xhr));
-      xhr.send();
-      return Unit;
-    };
-  }
-  function httpRequestTest$httpRequest(url) {
-    var p = new Promise(httpRequestTest$httpRequest$lambda(url));
-    return p;
-  }
-  function httpRequestTest(continuation_0, suspended) {
-    var instance = new Coroutine$httpRequestTest(continuation_0);
-    if (suspended)
-      return instance;
-    else
-      return instance.doResume(null);
-  }
-  function Coroutine$httpRequestTest(continuation_0) {
-    CoroutineImpl.call(this, continuation_0);
-    this.exceptionState_0 = 1;
-    this.local$httpRequest = void 0;
-    this.local$res = void 0;
-  }
-  Coroutine$httpRequestTest.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: null,
-    interfaces: [CoroutineImpl]
-  };
-  Coroutine$httpRequestTest.prototype = Object.create(CoroutineImpl.prototype);
-  Coroutine$httpRequestTest.prototype.constructor = Coroutine$httpRequestTest;
-  Coroutine$httpRequestTest.prototype.doResume = function () {
-    do
-      try {
-        switch (this.state_0) {
-          case 0:
-            this.local$httpRequest = httpRequestTest$httpRequest;
-            this.state_0 = 2;
-            this.result_0 = await_0(this.local$httpRequest('https://yesno.wtf/api'), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 1:
-            throw this.exception_0;
-          case 2:
-            this.local$res = this.result_0;
-            println('step1 ' + this.local$res);
-            this.state_0 = 3;
-            this.result_0 = await_0(this.local$httpRequest('https://yesno.wtf/api'), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 3:
-            this.local$res = this.result_0;
-            println('step2 ' + this.local$res);
-            this.state_0 = 4;
-            this.result_0 = await_0(this.local$httpRequest('https://yesno.wtf/api'), this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
-          case 4:
-            this.local$res = this.result_0;
-            println('step3 ' + this.local$res);
-            return;
-        }
-      }
-       catch (e) {
-        if (this.state_0 === 1) {
-          this.exceptionState_0 = this.state_0;
-          throw e;
-        }
-         else {
-          this.state_0 = this.exceptionState_0;
-          this.exception_0 = e;
-        }
-      }
-     while (true);
-  };
   function LogWidget() {
     ResourceWidget.call(this);
   }
@@ -1198,7 +1125,6 @@ this['demo-js'] = function (_, Kotlin, $module$kotlinx_coroutines_core) {
   package$fragment.Widget = Widget;
   package$fragment.ResourceWidget = ResourceWidget;
   _.main_kand9s$ = main;
-  _.httpRequestTest = httpRequestTest;
   var package$pages = _.pages || (_.pages = {});
   package$pages.LogWidget = LogWidget;
   Object.defineProperty(MainWidget, 'init', {
