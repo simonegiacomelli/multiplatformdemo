@@ -21,6 +21,7 @@ task assembleWeb(type: Sync) {
             includeEmptyDirs = false
             include { fileTreeElement ->
                 def path = fileTreeElement.path
+                //println(path)
                 path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
                         !path.startsWith("META-INF/"))
             }

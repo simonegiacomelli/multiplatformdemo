@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Demo</title>
+    <title>kotlin caldaia</title>
+    <link rel="icon" type="image/png" href="images/fire256.png"/>
+    <script src="mqttws31.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-</head>
 
+    <style>
 
+.selected {
+    background:lightgreen;
+}
+
+.rounded {
+    border: 2px solid;
+    border-radius: 25px;
+}
+
+[type=button] {
+ font-size:inherit;
+  height: 2em;
+
+}
+
+    </style>
 </head>
 <body>
 
-<textarea id="ta1" cols="80" rows="10">
-xxxx
-</textarea>
+<div id="loading">index.html ... Sto caricando... abbi pazienza...</div>
 
-<div id="div1">aaaaa</div>
 
 
 <script type="text/javascript" src="web/kotlin.js"></script>

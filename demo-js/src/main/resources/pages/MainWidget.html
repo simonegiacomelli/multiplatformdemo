@@ -1,0 +1,49 @@
+<div id="loading">Sto caricando... abbi pazienza...</div>
+<div id="loaded" style="display:none">
+    Tra quanto tempo? (Kotlin)<br>
+    <input id="inHDec" class="rounded" type="button" value="-">
+    <input id="inHours" type="text" value="0" min="0" max="99999" style=" width: 25px; text-align: center;">
+    <input id="inHInc" class="rounded" type="button" value="+">
+    ore e
+    <input id="inMDec" class="rounded" type="button" value="-">
+    <input id="inMinutes" type="text" value="0" min="0" max="59" style=" width: 25px; text-align: center;">
+    <input id="inMInc" class="rounded" type="button" value="+">
+    minuti
+    <br><br>
+    <input id="inZero" class="rounded" type="button" value="azzera ore e minuti">
+    <br><br>Oppure imposta la data:<br>
+    <input id="inDatetime" type="datetime-local"><br><br>
+    <div id="output"></div>
+
+    <div style="display: none">
+        <br>
+        Command:<input id="command" type="text">
+    </div>
+    <span id="hint"></span>
+    <br><br>
+    <input type="button" class="rounded" id="onbtn" value="ACCENDI">
+    <input type="button" class="rounded" id="offbtn" value="SPEGNI">
+    <br>
+
+
+    <div id="response"></div>
+    <br>
+    <input id="statusbtn" type="button" value="STATUS">
+    <input id="clearbtn" type="button" value="CLEAR CRON">
+    <br>
+    <input id="rebootbtn" type="button" value="REBOOT">
+    <input id="cronlistbtn" type="button" value="CRON LIST">
+    <br/>
+
+    <input id="url" type="text" size="40"><br/>
+    <select id="urlChoice">
+    </select>
+    <br>
+    <input type="checkbox" id="connected"> connesso
+    <br>
+    html ver1.3.8
+    <br>
+    <button id="log">log</button><button id="debug">debug</button>
+
+
+</div>

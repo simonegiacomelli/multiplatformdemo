@@ -1,3 +1,5 @@
+package fragment
+
 import org.w3c.xhr.XMLHttpRequest
 import kotlin.js.Promise
 
@@ -13,4 +15,14 @@ object HttpRequestDebug {
         }
         return p
     }
+
+    /*
+    window.fetch(Request("http://caldaia.dyndns.org:90/cgi-bin/c4?cmd=status")).then(onFulfilled = {
+it.text().then(onFulfilled = {
+    println(it)
+})
+})
+
+ */
+
 }
