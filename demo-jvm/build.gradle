@@ -4,14 +4,20 @@ apply plugin: 'application'
 mainClassName = 'demo.Main'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  expectedBy project(":demo-common")
+    expectedBy project(":demo-common")
 
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  testCompile "junit:junit:4.12"
-  testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-  testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+
+    compile group: 'org.nanohttpd', name: 'nanohttpd-webserver', version: '2.3.1'
+
+    compile("joda-time:joda-time:2.9.9")
+    compile("com.h2database:h2:1.4.196")
+
 }
