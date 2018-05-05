@@ -1,8 +1,6 @@
 package db4
 
-import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KClass
-import kotlin.reflect.KProperty
 
 enum class RowState {
     DEFAULT,
