@@ -1,3 +1,4 @@
+import demo.common.DataList
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialId
 import kotlinx.serialization.Serializable
@@ -8,11 +9,11 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLTextAreaElement
 import kotlin.browser.document
 
-@Serializable
-data class Data(@SerialId(1) val a: Int, @SerialId(2) val b: String)
-
-@Serializable
-data class DataList(@SerialId(1) @Optional val list: List<Data> = emptyList())
+//@Serializable
+//data class Data(@SerialId(1) val a: Int, @SerialId(2) val b: String)
+//
+//@Serializable
+//data class DataList(@SerialId(1) @Optional val list: List<Data> = emptyList())
 
 fun serialization_example() {
 
