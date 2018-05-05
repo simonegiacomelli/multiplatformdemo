@@ -1,23 +1,61 @@
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.await
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.get
 import kotlin.browser.document
 import kotlin.browser.window
-import jquery.*
-import org.w3c.dom.CanvasRenderingContext2D
-import org.w3c.dom.HTMLCanvasElement
-import kotlin.browser.document
-import kotlin.browser.window
+import org.w3c.dom.*
 import kotlin.js.Math
+import kotlin.js.Promise
+
 //import kotlin.math
+
+class EventException : Throwable() {
+
+}
+
+fun testPromise(fail: Boolean): Promise<String> {
+    return Promise({ resolve: (String) -> Unit, reject: (Throwable) -> Unit ->
+        if (fail)
+            reject(Throwable("fallito!"))
+        else
+            resolve("ok!")
+    })
+}
+
+
+fun main(args: Array<String>) {
+    val elements = document.getElementById("div1")!! as HTMLDivElement
+    val str = elements::class.js.name
+    //window.alert("$str")
+    val ta1 = document.getElementById("ta1")!! as HTMLTextAreaElement
+    async {
+
+
+        ta1.value += " uno "
+        ta1.value += " due "
+        try {
+            ta1.value += testPromise(true)
+                    .catch { ta1.value += " catch "; " return " }
+                    .await()
+            ta1.value += " tre "
+        } catch (ex: Exception) {
+            ta1.value += " exe "
+        }
+
+
+        //val x = JSON.parse<Any>(elements.innerHTML)
+        //elements.innerHTML = x::class.js.name
+        //console.log(x)
+    }
+
+
+}
 
 val canvas = initializeCanvas()
 fun initializeCanvas(): HTMLCanvasElement {
     val canvas = document.createElement("canvas") as HTMLCanvasElement
     val context = canvas.getContext("2d") as CanvasRenderingContext2D
-    context.canvas.width = window.innerWidth
-    context.canvas.height = window.innerHeight
+    context.canvas.width = window.innerWidth - 200
+    context.canvas.height = window.innerHeight - 200
     document.body!!.appendChild(canvas)
     return canvas
 }
@@ -102,7 +140,7 @@ fun renderBackground() {
     context.restore()
 }
 
-fun main(args: Array<String>) {
+fun main2(args: Array<String>) {
 
     val interval = 50
     // we pass a literal that constructs a new HelloKotlin object
@@ -119,17 +157,3 @@ fun main(args: Array<String>) {
 
 }
 
-
-fun main2(args: Array<String>) {
-    val elements = document.getElementById("div1")!! as HTMLDivElement
-    val str = elements::class.js.name
-    //window.alert("$str")
-    async {
-        elements.innerHTML = HttpRequestDebug.getString("http://httpbin.org/ip").await()
-        val x = JSON.parse<Any>(elements.innerHTML)
-        elements.innerHTML = x::class.js.name
-        console.log(x)
-    }
-
-
-}
