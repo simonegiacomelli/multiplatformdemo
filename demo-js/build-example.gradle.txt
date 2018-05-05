@@ -1,4 +1,7 @@
-apply plugin: 'kotlin-platform-js'
+/*
+https://github.com/Kotlin/kotlinx.serialization/blob/master/example-js/build.gradle
+ */
+
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -24,16 +27,12 @@ apply plugin: 'kotlinx-serialization'
 repositories {
     jcenter()
     mavenLocal()
-    mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
 dependencies {
-    expectedBy project(":demo-common")
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
-    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5")
-    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:0.22.5")
 }
 
 compileKotlin2Js {

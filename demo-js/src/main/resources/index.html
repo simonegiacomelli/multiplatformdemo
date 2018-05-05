@@ -27,14 +27,20 @@
     </style>
 </head>
 <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+<script type="text/javascript">
+    requirejs(['output'], function (app) {
+        app.framework_entry_point()
+    })
+</script>
 
 <div id="loading">index.html ... Sto caricando... abbi pazienza...</div>
 
 
 
-<script type="text/javascript" src="web/kotlin.js"></script>
-<script type="text/javascript" src="web/kotlinx-coroutines-core.js"></script>
-<script type="text/javascript" src="web/demo-js.js"></script>
+<!--<script type="text/javascript" src="kotlin.js"></script>-->
+<!--<script type="text/javascript" src="kotlinx-coroutines-core.js"></script>-->
+<!--<script type="text/javascript" src="output.js"></script>-->
 
 </body>
 </html>

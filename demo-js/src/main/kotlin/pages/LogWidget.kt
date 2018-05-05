@@ -8,7 +8,7 @@ import kotlin.browser.document
 
 class LogWidget : ResourceWidget() {
     override val resourceName: String
-        get() = "build/resources/main/pages/LogWidget.html"
+        get() = "pages/LogWidget.html"
 
     val counter get() = qs("#counter") as HTMLElement
 

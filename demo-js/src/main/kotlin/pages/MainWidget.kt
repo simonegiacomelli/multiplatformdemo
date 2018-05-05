@@ -12,17 +12,8 @@ import kotlin.js.Date
 
 class MainWidget : ResourceWidget() {
     override val resourceName: String
-        get() = "build/resources/main/pages/MainWidget.html"
+        get() = "pages/MainWidget.html"
 
-
-    object init {
-
-        fun startup(root: Element) {
-            val app = WidgetManager(root)
-            app.handleBack()
-            app.create(MainWidget()).show()
-        }
-    }
 
     val caldaiaCommands by lazy {
         CaldaiaRemote({ _url.value }, ::setLog, { _connected.checked = it }) //   () => _url.value, setLog, (con) => _connected.checked = con);
