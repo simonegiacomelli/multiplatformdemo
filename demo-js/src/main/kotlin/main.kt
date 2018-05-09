@@ -1,9 +1,8 @@
 import fragment.WidgetManager
-import pages.LogWidget
-import pages.MainWidget
+import pages.HttpRequestWidget
 import kotlin.browser.document
 
-fun framework_entry_point(){
+fun framework_entry_point() {
     //MainWidget.init.startup(document.getElementById("loading")!!)
     //MainWidget.init.startup(document.getElementById("loading")!!)
     val app = WidgetManager(document.getElementById("loading")!!)
@@ -14,7 +13,8 @@ fun framework_entry_point(){
 //            .show()
 
 //    app.create(MainWidget()).show()
-    app.create(LogWidget()).show()
+//    app.create(LogWidget()).show()
+    app.create(HttpRequestWidget()).show()
 
 }
 

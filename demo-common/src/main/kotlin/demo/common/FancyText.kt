@@ -11,8 +11,9 @@ class FancyText(private val text: String) {
 
 @Serializable
 data class Data(@SerialId(1) val a: Int, @SerialId(2) val b: String
-                //, @Optional val c: String = "def1"
+                //, @Optional val c: Any = "xx"
 )
 
 @Serializable
 data class DataList(@SerialId(1) @Optional val list: List<Data> = emptyList())
+

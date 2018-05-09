@@ -30,15 +30,15 @@ fun serialization_example() {
 
             val kotl = JSON.parse<DataList>(txt)
             val json = JSON.indented.stringify(kotl)
-            val proto = ProtoBuf.dumps(kotl)
-            val cbor = CBOR.dumps(kotl)
+          //  val proto = ProtoBuf.dumps(kotl)
+         //   val cbor = CBOR.dumps(kotl)
 
             kotlinLabel.value = kotl.toString()
             jsonLabel.value = json
-            protoLabel.value = proto
-            cborLabel.value = cbor
+//            protoLabel.value = proto
+  //          cborLabel.value = cbor
         } catch (e: Exception) {
-            kotlinLabel.value = e.message ?: "Unknown error"
+            kotlinLabel.value = "EXCEPTION: " + (e.message ?: "Unknown error")
             protoLabel.value = ""
             cborLabel.value = ""
         }
@@ -46,5 +46,5 @@ fun serialization_example() {
 
     btn.onclick = { convert() }
 
-    convert()
+    //convert()
 }

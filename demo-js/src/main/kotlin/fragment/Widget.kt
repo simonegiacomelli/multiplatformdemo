@@ -3,10 +3,7 @@ package fragment
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.await
-import org.w3c.dom.Element
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.Node
-import org.w3c.dom.asList
+import org.w3c.dom.*
 import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.browser.window
@@ -148,6 +145,8 @@ abstract class Widget {
         if (id.startsWith("#")) id = id.substring(1)
         return elements[instanceId(id)]!!
     }
+
+    fun qsh(id: String) = qs(id) as HTMLElement
 
     fun close() {
         if (manager == null) throw Exception("no manager defined")
