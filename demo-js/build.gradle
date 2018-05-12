@@ -2,7 +2,7 @@ apply plugin: 'kotlin-platform-js'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.2.40'
+    ext.kotlin_version = '1.2.41'
     ext.serialization_version = '0.5.0'
     ext.web_path = 'web'
 

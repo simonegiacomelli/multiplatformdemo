@@ -14,6 +14,7 @@ class HttpRequestWidget : ResourceWidget() {
     val url: HTMLInputElement by docu
     val output: HTMLTextAreaElement by docu
     val ul: HTMLUListElement by docu
+    val btntest1: HTMLButtonElement by docu
 
     override fun htmlLoaded() {
         url.value = window.localStorage["saveurl"].orEmpty()
@@ -23,6 +24,9 @@ class HttpRequestWidget : ResourceWidget() {
         if (url.value.isNotEmpty())
             makeRequest()
 
+        btntest1.onclick = {
+            manager.create(LogWidget()).show()
+        }
     }
 
     private fun makeRequest() {
