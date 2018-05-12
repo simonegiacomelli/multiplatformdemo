@@ -8,6 +8,7 @@ import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.browser.window
 import kotlin.js.Promise
+import kotlin.reflect.KProperty
 
 class WidgetManager(val root: Element) {
     val widgets = mutableListOf<Widget>()
@@ -118,7 +119,7 @@ abstract class Widget {
 
     fun rename(node: Node, instanceName: String) {
         if (node is Element) {
-            if (node.id.length > 0) {
+            if (node.id.isNotEmpty()) {
                 node.id = instanceId(node.id);
                 elements.put(node.id, node);
             }
@@ -155,6 +156,16 @@ abstract class Widget {
 
     fun onClick(name: String, function: (Event) -> Unit) {
         qs(name).addEventListener("click", function)
+    }
+
+    interface docElementsInt {
+        operator fun <T> getValue(thisRef: Any?, property: KProperty<*>): T
+    }
+
+    val docu = object : docElementsInt {
+        override operator fun <T> getValue(thisRef: Any?, property: KProperty<*>): T {
+            return qs(property.name) as T
+        }
     }
 
 }
