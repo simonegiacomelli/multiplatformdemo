@@ -1,11 +1,15 @@
 package demo
 
+import db4common.`DataTableTest`
 import demo.common.FancyText
 import java.sql.DriverManager
 
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {
+
+        DataTableTest.go()
+
         val fancyText = FancyText("Main")
         val string = fancyText.toString()
         println(string)

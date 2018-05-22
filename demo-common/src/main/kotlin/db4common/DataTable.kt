@@ -1,4 +1,4 @@
-package db4
+package db4common
 
 import kotlin.reflect.KClass
 
