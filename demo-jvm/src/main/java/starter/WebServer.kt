@@ -16,9 +16,16 @@ fun <T> syncDb(block: (conn: Connection) -> T): T {
     Class.forName("org.firebirdsql.jdbc.FBDriver")
     val conn = DriverManager.getConnection("jdbc:firebirdsql://srvga.pulitori.local:3051/d:/Database/ga2/GESTIONEAZIENDALE.fdb", "sysdba", "masterkey");
 
-    conn.use { conn ->
+    try {
         return block(conn)
+    } finally {
+        conn.close()
     }
+
+//    conn.use { conn ->
+//        return block(conn)
+//    }
+
 }
 
 

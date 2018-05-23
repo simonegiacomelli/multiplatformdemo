@@ -3,7 +3,7 @@ package starter
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.MIME_PLAINTEXT
 
-class HttpServer : NanoHTTPD(8083) {
+class HttpServer(val port: Int) : NanoHTTPD(port) {
     val handlers: MutableMap<String, (NanoHTTPD.IHTTPSession) -> NanoHTTPD.Response> = mutableMapOf()
 
     init {
@@ -67,6 +67,12 @@ val NanoHTTPD.IHTTPSession.params: Map<String, String>
 
 fun NanoHTTPD.IHTTPSession.response(content: String): NanoHTTPD.Response {
     val newFixedLengthResponse = NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, MIME_PLAINTEXT, content)
-    newFixedLengthResponse.addHeader("Access-Control-Allow-Origin","*");
+    newFixedLengthResponse.addHeader("Access-Control-Allow-Origin", "*");
+    return newFixedLengthResponse
+}
+
+fun NanoHTTPD.IHTTPSession.forbidden(): NanoHTTPD.Response {
+    val newFixedLengthResponse = NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, MIME_PLAINTEXT, "")
+    newFixedLengthResponse.addHeader("Access-Control-Allow-Origin", "*");
     return newFixedLengthResponse
 }

@@ -1,8 +1,6 @@
-apply plugin: 'kotlin-platform-jvm'
-apply plugin: 'application'
 
 buildscript {
-    ext.kotlin_version = '1.2.40'
+    ext.kotlin_version = '1.2.41'
     ext.serialization_version = '0.5.0'
 
     repositories {
@@ -13,8 +11,16 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
+//        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
     }
 }
+
+plugins {
+    id 'java'
+    id "us.kirchmeier.capsule" version "1.0.2"
+}
+apply plugin: 'kotlin-platform-jvm'
+apply plugin: 'application'
 
 mainClassName = 'demo.Main'
 apply plugin: 'kotlin'
@@ -23,6 +29,7 @@ apply plugin: 'kotlinx-serialization'
 repositories {
     jcenter()
     mavenCentral()
+
     maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
@@ -41,4 +48,23 @@ dependencies {
     compile("joda-time:joda-time:2.9.9")
     compile("com.h2database:h2:1.4.196")
 
+}
+
+
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+
+//task onejar(type: OneJar) {
+//    mainClass = 'starter.WebServer'
+//    archiveName = 'kotlin-webserver.jar'
+//}
+
+task fatCapsule(type: FatCapsule) {
+    applicationClass 'starter.WebServer'
 }
